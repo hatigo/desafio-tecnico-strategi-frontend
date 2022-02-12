@@ -1,9 +1,14 @@
+import "./style.scss";
+import Header from '../../components/header';
 
+function Resumo() {
 
-function Resumo () {
-    
     return (
-       <h1>Resumo</h1>
+        <div className="resumo-page">
+            <Header />
+            <h1>Resumo</h1>
+        </div>
+
     );
 
 }

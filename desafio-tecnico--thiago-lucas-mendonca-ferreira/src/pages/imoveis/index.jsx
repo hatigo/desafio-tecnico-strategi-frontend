@@ -1,9 +1,21 @@
+import './style.scss';
+import CardImoveis from '../../components/cardImoveis';
+import Header from '../../components/header';
 
+function Imoveis() {
 
-function Imoveis () {
-    
     return (
-       <h1>Imoveis</h1>
+        <div className='imoveis-page'>
+            <Header/>
+            <h1>Imoveis</h1>
+            <CardImoveis 
+            tipo="Apartamento"
+            endereco="rua estrela do mar, 222"
+            valorDaVenda="220000"
+        
+            />
+        </div>
+
     );
 
 }
