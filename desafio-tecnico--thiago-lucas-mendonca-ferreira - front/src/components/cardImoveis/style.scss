@@ -1,0 +1,29 @@
+.card-imoveis {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin:1em;
+    margin-left: 4em;
+    padding:3em;
+
+    width: 30em;
+    border-radius: 1em;
+    box-shadow: 0 0 1em black;
+&:hover {
+    zoom: 1.1;
+    
+}
+
+    background-color: #FAFAFA;
+
+    h2{
+       margin: 0.3em;
+    }
+
+    img {
+        margin-bottom: 1em;
+    }
+
+    cursor: pointer;
+}

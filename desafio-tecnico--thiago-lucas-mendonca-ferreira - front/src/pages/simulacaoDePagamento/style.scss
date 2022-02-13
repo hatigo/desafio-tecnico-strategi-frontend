@@ -1,0 +1,79 @@
+@import "../../assets/Sass/fonts.scss";
+
+.simulacao-page {
+    display: flex;
+    flex-direction: column;
+    
+    
+
+    background-color: rgb(230, 230, 230);
+    min-height: 100vh;
+
+    h1{
+        margin-left: 3em;
+        margin-bottom: 1em;
+
+        font-family: $montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 3em;
+    }
+    .card-pagamento {
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    
+        margin-left: 7.15em;
+        margin-right: 7.15em;
+        padding: 1em;
+    
+        font-family: $nunito;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 40px;
+    
+        color: black;
+    
+        
+        background-color: #FAFAFA;
+    
+        border-bottom: 1px solid rgb(192, 192, 192);
+    
+       &:hover {
+        background-color: #cecece;
+       }
+    
+    }
+
+    button {
+        all: unset;
+        cursor: pointer;
+        margin:4rem auto;
+        padding: 0.5rem 4rem;
+        text-align: center;
+        background-color: blue;
+        border-radius: 1rem;
+        transition: 0.2s;
+        color: #f8f8f9;
+
+        box-shadow: 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02);
+    
+        
+
+        font-family: Nunito;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.2rem;
+
+        &:active {
+            box-shadow: 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.042),
+            6.7px 6.7px 5.3px rgba(0, 0, 0, 0.061),
+            12.5px 12.5px 10px rgba(0, 0, 0, 0.075)
+           
+        }
+
+     
+    }
+}

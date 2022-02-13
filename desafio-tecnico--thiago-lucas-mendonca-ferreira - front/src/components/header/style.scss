@@ -1,0 +1,41 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 10em;
+
+    background-color: black;
+
+    margin-bottom: 4em;
+    
+    img{
+        max-width: 21em;
+        margin-left: 6em;
+    }
+
+    ul {
+        display: flex;
+        margin-right: 6em;
+        
+
+        li {
+    
+            list-style-type: none;
+            margin-right: 3em;
+            text-decoration: none;
+            font-family: Nunito;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 1.1em;
+            
+
+            h2 {
+              
+                color: white;
+            }
+
+        }
+
+    }
+}
