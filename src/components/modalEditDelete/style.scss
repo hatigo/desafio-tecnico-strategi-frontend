@@ -1,0 +1,32 @@
+@import "../../assets/Sass/fonts.scss";
+
+.modal-edit-delete {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    
+
+    width: 4em;
+    padding: 0.4em;
+
+    background-color: #FAFAFA;
+
+    
+    border-radius: 1em;
+    box-shadow: 0 0 0.2em black;
+
+    h2 {
+    
+    font-family: $nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1em;
+    
+    cursor: pointer;
+
+    &:hover {
+        background-color: #cecece;
+    }
+    }
+}
