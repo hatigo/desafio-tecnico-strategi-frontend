@@ -4,12 +4,12 @@ import lupa from "../../assets/lupa.svg";
 import soma from "../../assets/soma.png";
 import CardCadastroCliente from "../../components/cardCadastroCliente";
 import CardClientes from "../../components/cardClientes";
+import CardEditCliente from "../../components/cardEditCliente";
 import Header from "../../components/header";
 import ToastErro from "../../components/toastErro";
 import ToastSuccess from "../../components/toastSuccess";
 import useUser from "../../hooks/useUser";
 import "./style.scss";
-import CardEditCliente from "../../components/cardEditCliente";
 
 
 function Clientes() {
@@ -22,37 +22,35 @@ function Clientes() {
         setOpenEditmodal,
         token
     } = useUser();
+    
     const [inputClientes, setInputClientes] = useState();
-    const [inputFiltro, setInputFiltro] = useState("recentes");
     const [openModal, setOpenModal] = useState(false);
     const [clientes, setClientes] = useState([]);
 
-
-
     useEffect(() => {
-        async function getClientes() {
+        getClientes();
+    }, []);
 
-            try {
-                const response = await fetch('http://localhost:3000/clientes', {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
+    async function getClientes() {
 
-                const data = await response.json();
+        try {
+            const response = await fetch('http://localhost:3000/clientes', {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
 
-                setClientes(data.success);
+            const data = await response.json();
 
+            setClientes(data.success);
+            
 
-            } catch (error) {
-                console.log(error);
-            }
-
+        } catch (error) {
+            console.log(error);
         }
 
-        getClientes();
-    }, [clientes]);
+    }
 
 
     return (
@@ -60,10 +58,10 @@ function Clientes() {
         <div className="clientes-page">
             <Header />
             <div className="clientes-header">
-                {openModal && <CardCadastroCliente setOpenModal={setOpenModal} />}
+                {openModal && <CardCadastroCliente setOpenModal={setOpenModal} getClientes={getClientes} />}
                 {success && <ToastSuccess message={successMessage} />}
                 {error && <ToastErro message={errorMessage} />}
-                {openEditModal && <CardEditCliente setOpenEditmodal={setOpenEditmodal} />}
+                {openEditModal && <CardEditCliente setOpenEditmodal={setOpenEditmodal} getClientes={getClientes} />}
                 <h1>Gerenciar Clientes</h1>
                 <div className="input-clientes">
                     <img src={lupa} alt="lupa" />
@@ -80,8 +78,8 @@ function Clientes() {
                 </div>
                 <div className="select">
                     <select name="filtro" id="filtro">
-                        <option onSelect={() => setInputFiltro("recentes")} value="recentes">Filtrar por: mais recentes </option>
-                        <option onSelect={() => setInputFiltro("antigos")} value="antigos">Filtrar por: mais antigos</option>
+                        <option value="recentes">Filtrar por: mais recentes </option>
+                        <option value="antigos">Filtrar por: mais antigos</option>
                     </select>
                     <img src={arrowDown} alt="seta para baixo" />
                 </div>
@@ -108,7 +106,7 @@ function Clientes() {
                         cpf={cliente.cpf}
                         telefone={cliente.telefone}
                         urlDaFoto={cliente.url_da_foto}
-
+                        getClientes={getClientes}
                     />
                 )
             })}

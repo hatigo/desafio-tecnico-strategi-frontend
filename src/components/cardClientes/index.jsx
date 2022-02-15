@@ -7,7 +7,7 @@ import ModalEditDelete from "../modalEditDelete";
 import "./style.scss";
 
 
-function CardClientes({ nome, email, dataCadastro, id , cpf, telefone, urlDaFoto}) {
+function CardClientes({ nome, email, dataCadastro, id , cpf, telefone, urlDaFoto, getClientes}) {
     const { setCliente} = useUser();
     const navigate = useNavigate();
     const [openModalEditDelete, setOpenModalEditDelete] = useState(false);
@@ -53,9 +53,6 @@ function CardClientes({ nome, email, dataCadastro, id , cpf, telefone, urlDaFoto
     }
 
 
-
-
-
     return (
         <div onClick={handleClientes} className="card-clientes">
             <span><img className="clientPicture" src={ urlDaFoto ? urlDaFoto: foto} alt="imagem do cliente" />{nome}</span>
@@ -63,7 +60,7 @@ function CardClientes({ nome, email, dataCadastro, id , cpf, telefone, urlDaFoto
             <span>{dataDeCadastro}</span>
             <div onClick={e => e.stopPropagation()}>
                 <img onClick={handleModalEditDelete} src={tresPontos} alt="reticências" />
-                {openModalEditDelete && <ModalEditDelete setOpenModalEditDelete={setOpenModalEditDelete} />}
+                {openModalEditDelete && <ModalEditDelete setOpenModalEditDelete={setOpenModalEditDelete} getClientes={getClientes} />}
             </div>
         </div>
     )

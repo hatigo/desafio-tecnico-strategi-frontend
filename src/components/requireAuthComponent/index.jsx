@@ -1,8 +1,8 @@
+import { Outlet } from "react-router-dom";
 import useUser from "../../hooks/useUser";
 import Redirecting from "../redirectComponent";
-import { Outlet } from "react-router-dom";
 
-function RequireAuth ({children}) {
+function RequireAuth () {
     const { isAuthenticated } = useUser();
 
     return isAuthenticated ? <Outlet/> : <Redirecting/>;

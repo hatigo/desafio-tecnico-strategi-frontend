@@ -2,7 +2,7 @@ import useUser from "../../hooks/useUser";
 import "./style.scss";
 
 
-function ModalEditDelete({setOpenModalEditDelete}) {
+function ModalEditDelete({ setOpenModalEditDelete, getClientes }) {
     const { cliente,
         error,
         setError,
@@ -15,8 +15,6 @@ function ModalEditDelete({setOpenModalEditDelete}) {
         setOpenEditmodal,
         token
     } = useUser();
-
-    
 
 
     async function excluirCliente() {
@@ -31,7 +29,7 @@ function ModalEditDelete({setOpenModalEditDelete}) {
 
             const data = await response.json();
 
-            console.log(data);
+            
             if (!data.success) {
                 setOpenModalEditDelete(false)
                 setErrorMessage(data.error);
@@ -44,13 +42,11 @@ function ModalEditDelete({setOpenModalEditDelete}) {
 
             setOpenModalEditDelete(false)
             setSuccessMessage(data.success);
-                setSuccess(true);
-                setTimeout(() => {
-                    setSuccess(false);
-                }, 3000);
-
-
-
+            setSuccess(true);
+            setTimeout(() => {
+                setSuccess(false);
+            }, 3000);
+            getClientes();
 
         } catch (error) {
             console.log(error.message);
@@ -58,7 +54,7 @@ function ModalEditDelete({setOpenModalEditDelete}) {
 
     }
 
-    const handleEditDelete = () => {
+    function handleEditDelete() {
         setOpenEditmodal(true);
         setOpenModalEditDelete(false);
     }
@@ -68,7 +64,7 @@ function ModalEditDelete({setOpenModalEditDelete}) {
         <div className="modal-edit-delete">
             <h2 onClick={excluirCliente}>Excluir</h2>
             <h2 onClick={handleEditDelete}>Editar</h2>
-            
+
         </div>
     )
 }

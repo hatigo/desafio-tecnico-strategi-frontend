@@ -1,7 +1,7 @@
 import './style.scss';
 
 
- function Input ({ inputState, setInputState, htmlFor, placeholder, type, text }) {
+function Input({ inputState, setInputState, htmlFor, placeholder, type, text }) {
 
     return (
         <div className="input">
@@ -15,10 +15,7 @@ import './style.scss';
                 type={type}
 
             />
-
         </div>
-
-
     )
 }
 

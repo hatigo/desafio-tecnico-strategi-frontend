@@ -1,6 +1,5 @@
 import "./style.scss";
 
-
 function ToastErro({message}) {
     return (
         <div className="toast-error-container">

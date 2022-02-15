@@ -1,6 +1,6 @@
-import './App.scss';
-import Rotas from '../rotas/routes';
 import { BrowserRouter } from "react-router-dom";
+import Rotas from '../rotas/routes';
+import './App.scss';
 
 function App() {
   return (

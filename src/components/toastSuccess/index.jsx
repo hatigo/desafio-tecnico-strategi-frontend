@@ -1,6 +1,5 @@
 import "./style.scss";
 
-
 function ToastSuccess({message}) {
     return (
         <div className="toast-success-container">

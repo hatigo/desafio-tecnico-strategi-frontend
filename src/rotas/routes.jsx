@@ -9,7 +9,6 @@ import Simulacao from "../pages/simulacaoDePagamento";
 
 
 function Rotas() {
-
     return (
         <UserProvider>
             <Routes>
@@ -20,12 +19,9 @@ function Rotas() {
                     <Route path="clientes" element={<Clientes />} />
                     <Route path='resumo' element={<Resumo />} />
                 </Route>
-
-
             </Routes>
         </UserProvider>
     );
-
-}
+};
 
 export default Rotas;

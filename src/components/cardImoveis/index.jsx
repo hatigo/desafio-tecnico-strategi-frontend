@@ -7,10 +7,7 @@ function CardImoveis({ tipo, endereco, valorDaVenda, foto, id }) {
     const { setImovel } = useUser();
     const navigate = useNavigate();
     
-
     const comissao = ((valorDaVenda.split(" ")[1].split(".").join("").split(",")[0]) * 0.05).toLocaleString('pt-br' ,{style: 'currency', currency:'BRL'});
-    
-
     
     function handleImoveis() {
         
@@ -21,9 +18,8 @@ function CardImoveis({ tipo, endereco, valorDaVenda, foto, id }) {
             valorDaComissao: comissao,
             id
         })
-
+        
         navigate("/simulacao");
-
     }
 
     return (

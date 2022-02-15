@@ -1,24 +1,14 @@
-import CardLogin from "../../components/cardLogin";
-import './style.scss';
 import { useNavigate } from "react-router-dom";
-import useUser from "../../hooks/useUser";
+import CardLogin from "../../components/cardLogin";
 import ToastErro from "../../components/toastErro";
+import useUser from "../../hooks/useUser";
+import './style.scss';
 
 function Login() {
   const navigate = useNavigate();
   const { setToken, setcorretor, setIsAuthenticated, setError, setErrorMessage, error, errorMessage } = useUser();
-  
 
-  const handleError = () => {
-    setError(true);
-    setTimeout(() => {
-      setError(false)
-    }, 3000);
-  }
-
-
-
-  const handleLogin = async (nome, senha) => {
+  async function handleLogin(nome, senha) {
 
     const loginData = {
       nome,
@@ -38,7 +28,10 @@ function Login() {
 
       if (!data.success) {
         setErrorMessage(data.error);
-        handleError();
+        setError(true);
+        setTimeout(() => {
+          setError(false)
+        }, 3000);
         return;
       }
 
@@ -55,20 +48,14 @@ function Login() {
       console.log(error);
     }
 
-
   }
 
   return (
     <div className="login-page">
       {error && <ToastErro message={errorMessage} />}
       <CardLogin handleLogin={handleLogin} />
-
     </div>
-
-
-
   );
-
-}
+};
 
 export default Login;

@@ -1,20 +1,19 @@
-import "./style.scss";
-import Input from "../inputs";
 import { useState } from "react";
-import closeicon from "../../assets/closeIcon.svg"
-import ToastErro from "../toastErro";
-import ToastSuccess from "../toastSuccess";
+import closeicon from "../../assets/closeIcon.svg";
 import useUser from "../../hooks/useUser";
+import Input from "../inputs";
+import ToastErro from "../toastErro";
+import "./style.scss";
 
 
-function CardCadastroCliente({ setOpenModal }) {
+function CardCadastroCliente({ setOpenModal, getClientes }) {
     const { setSuccess, setSuccessMessage, error, setError, errorMessage, setErrorMessage, token } = useUser();
     const [inputName, setInputName] = useState();
     const [inputCpf, setInputCpf] = useState();
     const [inputEmail, setInputEmail] = useState();
     const [inputTelefone, setInputTelefone] = useState();
 
-    const handleCadastro = async (e) => {
+    async function handleCadastro(e) {
         e.preventDefault()
 
         const newCliente = {
@@ -24,36 +23,40 @@ function CardCadastroCliente({ setOpenModal }) {
             telefone: inputTelefone
         }
 
-        const response = await fetch('http://localhost:3000/cliente-cadastro', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify(newCliente)
+        try {
+            const response = await fetch('http://localhost:3000/cliente-cadastro', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(newCliente)
 
-        })
+            })
 
-        const data = await response.json();
-        console.log(data);
-        if (!data.success) {
-            setErrorMessage(data.error);
-            setError(true);
+            const data = await response.json();
+          
+            if (!data.success) {
+                setErrorMessage(data.error);
+                setError(true);
+                setTimeout(() => {
+                    setError(false)
+                }, 3000);
+                return;
+            }
+
+            setSuccessMessage(data.success);
+            setSuccess(true);
             setTimeout(() => {
-                setError(false)
+                setSuccess(false)
             }, 3000);
-            return;
+            getClientes();
+            setOpenModal(false);
+
+        } catch (error) {
+            console.log(error.message)
         }
-
-        setSuccessMessage(data.success);
-        setSuccess(true);
-        setTimeout(() => {
-            setSuccess(false)
-        }, 3000);
-        setOpenModal(false);
-
-    }
-
+    };
 
 
     return (

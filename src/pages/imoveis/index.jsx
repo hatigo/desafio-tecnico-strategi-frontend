@@ -1,35 +1,35 @@
-import './style.scss';
+import { useEffect, useState } from 'react';
 import CardImoveis from '../../components/cardImoveis';
 import Header from '../../components/header';
 import useUser from '../../hooks/useUser';
-import { useEffect, useState } from 'react';
+import './style.scss';
 
 function Imoveis() {
-
     const { token } = useUser();
     const [imoveis, setImoveis] = useState([]);
-
 
     useEffect(() => {
 
         async function getImoveis() {
 
-            const response = await fetch('http://localhost:3000/imoveis', {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            try {
+                const response = await fetch('http://localhost:3000/imoveis', {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
 
-            const data = await response.json();
+                const data = await response.json();
 
-            setImoveis(data.success);
+                setImoveis(data.success);
+            } catch (error) {
+                console.log(error.message);
+            }
         }
 
         getImoveis();
     }, [])
-
-
 
     return (
         <div className='imoveis-page'>
@@ -50,9 +50,7 @@ function Imoveis() {
                 })}
             </div>
         </div>
-
     );
-
-}
+};
 
 export default Imoveis;

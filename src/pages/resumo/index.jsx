@@ -1,9 +1,9 @@
-import "./style.scss";
-import Header from '../../components/header';
-import useUser from "../../hooks/useUser";
-import ToastSuccess from "../../components/toastSuccess";
-import ToastErro from "../../components/toastErro";
 import { useNavigate } from "react-router-dom";
+import Header from '../../components/header';
+import ToastErro from "../../components/toastErro";
+import ToastSuccess from "../../components/toastSuccess";
+import useUser from "../../hooks/useUser";
+import "./style.scss";
 
 function Resumo() {
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Resumo() {
 
     } = useUser();
 
-    const comissaoNumber = ((imovel.valorDaVenda.split(" ")[1].split(".").join("").split(",")[0]) * 0.05);
+    const comissaoNumber = imovel.valorDaVenda && ((imovel.valorDaVenda.split(" ")[1].split(".").join("").split(",")[0]) * 0.05);
 
     async function cadastrarVendas() {
         const newVenda = {
@@ -31,45 +31,44 @@ function Resumo() {
             valor: imovel.valorDaVenda,
             condicaoDePagamento: pagamento.formaDePagamento,
             comissao: comissaoNumber,
-            id_cliente: cliente.id,
+            nomeCliente: cliente.nome,
             email: cliente.email
 
-        }
+        };
 
-        const response = await fetch('http://localhost:3000/vendas-cadastro', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify(newVenda)
-        })
+        try {
+            const response = await fetch('http://localhost:3000/vendas-cadastro', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(newVenda)
+            })
 
-        const data = await response.json();
+            const data = await response.json();
 
-        console.log(data);
+            if (!data.success) {
+                setErrorMessage(data.error);
+                setError(true);
+                setTimeout(() => {
+                    setError(false)
+                }, 3000);
 
-        if (!data.success) {
-            setErrorMessage(data.error);
-            setError(true);
+                return;
+            }
+            setSuccessMessage(data.success);
+            setSuccess(true);
             setTimeout(() => {
-                setError(false)
+                setSuccess(false)
+                navigate('/imoveis')
             }, 3000);
 
-            return;
+        } catch (error) {
+            console.log(error.message);
         }
 
-        setSuccessMessage(data.success);
-        setSuccess(true);
-        setTimeout(() => {
-            setSuccess(false)
-            navigate('/imoveis')
-        }, 3000);
-
     }
-
-
-
 
     return (
         <div className="resumo-page">
@@ -114,9 +113,6 @@ function Resumo() {
             <div className="card-resumo button">
                 <button onClick={cadastrarVendas}>Finalizar Venda</button>
             </div>
-
-
-
         </div>
 
     );
