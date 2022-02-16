@@ -3,6 +3,9 @@
     justify-content: space-between;
     align-items: center;
 
+    position:sticky;
+    top:-0.9em;
+
     height: 10em;
 
     background-color: black;
@@ -12,6 +15,8 @@
     img{
         max-width: 21em;
         margin-left: 6em;
+
+        cursor: pointer;
     }
 
     ul {

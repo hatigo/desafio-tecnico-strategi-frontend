@@ -34,7 +34,7 @@ function Imoveis() {
     return (
         <div className='imoveis-page'>
             <Header />
-            <h1>Imoveis</h1>
+            <h1>Imóveis</h1>
             <div className='imoveis-container' >
                 {imoveis && imoveis.map(imovel => {
                     return (
